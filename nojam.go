@@ -34,6 +34,31 @@ func nojam2743() {
 	}
 }
 
+func nojam4999() {
+	var me string
+	var doc string
+	fmt.Scan(&me)
+	fmt.Scan(&doc)
+	var mecount int
+	var doccount int
+	for _, i := range me {
+		if string(i) == "a" {
+			mecount++
+		}
+	}
+	for _, j := range doc {
+		if string(j) == "a" {
+			doccount++
+		}
+	}
+
+	if mecount >= doccount {
+		fmt.Println("go")
+		return
+	}
+	fmt.Println("no")
+}
+
 func main() {
-	nojam2743()
+	nojam4999()
 }
