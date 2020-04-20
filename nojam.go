@@ -68,7 +68,7 @@ func nojam10988() {
 			count++
 		}
 	}
-	if count == len(palen) {
+	if count == len(palen)/2 {
 		fmt.Println(1)
 	} else {
 		fmt.Println(0)
