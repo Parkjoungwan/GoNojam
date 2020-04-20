@@ -59,6 +59,22 @@ func nojam4999() {
 	fmt.Println("no")
 }
 
+func nojam10988() {
+	var palen string
+	fmt.Scan(&palen)
+	var count int
+	for i := 0; i < len(palen)/2; i++ {
+		if palen[i] == palen[len(palen)-i-1] {
+			count++
+		}
+	}
+	if count == len(palen) {
+		fmt.Println(1)
+	} else {
+		fmt.Println(0)
+	}
+
+}
 func main() {
-	nojam4999()
+	nojam10988()
 }
