@@ -107,6 +107,78 @@ func nojam1002() {
 	}
 }
 
+func nojam2941() {
+	var Cro string
+	var count int
+	var count2 int
+	var dzcount int
+	fmt.Scan(&Cro)
+	for i := 0; i < len(Cro); i++ {
+		if string(Cro[i]) == "c" {
+			if i == len(Cro)-1 {
+				break
+			}
+			if string(Cro[i+1]) == "=" || string(Cro[i+1]) == "-" {
+				count++
+				count2 += 2
+			}
+		} else if string(Cro[i]) == "d" {
+			if i == len(Cro)-1 {
+				break
+			}
+			if i == len(Cro)-1 {
+				break
+			}
+			if string(Cro[i+1]) == "-" {
+				count++
+				count2 += 2
+			} else if string(Cro[i+1]) == "z" {
+				if i+1 == len(Cro)-1 {
+					break
+				}
+				if string(Cro[i+2]) == "=" {
+					count++
+					count2++
+					dzcount++
+				}
+			}
+		} else if string(Cro[i]) == "l" {
+			if i == len(Cro)-1 {
+				break
+			}
+			if string(Cro[i+1]) == "j" {
+				count++
+				count2 += 2
+			}
+		} else if string(Cro[i]) == "n" {
+			if i == len(Cro)-1 {
+				break
+			}
+			if string(Cro[i+1]) == "j" {
+				count++
+				count2 += 2
+			}
+		} else if string(Cro[i]) == "s" {
+			if i == len(Cro)-1 {
+				break
+			}
+			if string(Cro[i+1]) == "=" {
+				count++
+				count2 += 2
+			}
+		} else if string(Cro[i]) == "z" {
+			if i == len(Cro)-1 {
+				break
+			}
+			if string(Cro[i+1]) == "=" {
+				count++
+				count2 += 2
+			}
+		}
+	}
+	fmt.Println((len(Cro) - count2) + (count - dzcount))
+}
+
 func main() {
-	nojam1002()
+	nojam2941()
 }
