@@ -56,6 +56,53 @@ func (h cusheap) Less(i, j int) bool {
 
 func (h cusheap) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
 
+func nojam16212() {
+	var N int
+	fmt.Scan(&N)
+	X := make([]int, N)
+	for i := 0; i < N; i++ {
+		fmt.Scan(&X[i])
+	}
+	sort.Sort(sort.IntSlice(X))
+	for i := 0; i < N; i++ {
+		fmt.Print(X[i], " ")
+	}
+}
+
+func nojam1059() {
+	var N int
+	var num [1001]int
+	var Luckey int
+	fmt.Scan(&N)
+	for i := 0; i < N; i++ {
+		fmt.Scan(&Luckey)
+		num[Luckey] = 1
+	}
+	var Unlukey int
+	fmt.Scan(&Unlukey)
+	var down int
+	down = 0
+	var up int
+	var check int
+	for i := 1; i < 1001; i++ {
+		if num[i] == 1 && check == 0 {
+			down = i
+		}
+		if i == Unlukey {
+			check = 1
+		}
+		if num[i] == 1 && i == Unlukey {
+			fmt.Println(0)
+			return
+		}
+		if check == 1 && num[i] == 1 {
+			up = i
+			break
+		}
+	}
+	fmt.Println(down, Unlukey, up)
+	fmt.Println((Unlukey-down)*(up-Unlukey) - 1)
+}
 func main() {
-	nojam11650()
+	nojam1059()
 }
