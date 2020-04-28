@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"sort"
 )
 
@@ -112,20 +114,31 @@ func nojam2875() {
 
 }
 func nojam10610() {
-	var N string
-	var checkNum int
-	fmt.Scan(&N)
-	var checkZero int
-	for i := 0; i < len(N); i++ {
-		checkNum += int(N[i] - '0')
-		if int(N[i]-'0') == 0 {
-			checkZero = 1
-		}
+	var s string
+	var sum int64
+	sc := bufio.NewScanner(os.Stdin)
+	wr := bufio.NewWriter(os.Stdout)
+	digit := make([]int, 10)
+	const maxCapacity = 512 * 1024
+	buf := make([]byte, maxCapacity)
+	sc.Buffer(buf, maxCapacity)
+	defer wr.Flush()
+	if sc.Scan() {
+		s = sc.Text()
 	}
-	if checkNum%3 == 0 && checkZero == 1 {
-		fmt.Println(checkNum * 10)
+	for i := 0; i < len(s); i++ {
+		var tmp = int64(s[i] - '0')
+		digit[tmp]++
+		sum += tmp
+	}
+	if digit[0] == 0 || sum%3 != 0 {
+		fmt.Fprintf(wr, "-1")
 	} else {
-		fmt.Println("-1")
+		for i := 9; i >= 0; i-- {
+			for j := 0; j < digit[i]; j++ {
+				fmt.Fprintf(wr, "%d", i)
+			}
+		}
 	}
 }
 
