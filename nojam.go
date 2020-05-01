@@ -2,16 +2,28 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"math"
 	"os"
-	"sort"
 	"strconv"
+	"strings"
+)
+
+var (
+	sc    = bufio.NewScanner(os.Stdin)
+	wr    = bufio.NewWriter(os.Stdout)
+	n     int
+	a     [11]int
+	op    [4]int
+	ops   [10]int
+	check [10]bool
+	idx   int
+	min64 = 1<<63 - 1
+	max64 = -1 << 63
 )
 
 func nojam9020() {
-	wr := bufio.NewWriter(os.Stdout)
-	sc := bufio.NewScanner(os.Stdin)
 	defer wr.Flush()
 	var T int
 	if sc.Scan() {
@@ -49,47 +61,115 @@ func nojam9020() {
 	}
 }
 func nojam14888() {
-	wr := bufio.NewWriter(os.Stdout)
-	sc := bufio.NewScanner(os.Stdin)
-	defer wr.Flush()
-	var T int
 	if sc.Scan() {
-		T, _ = strconv.Atoi(sc.Text())
+		n = toInt(sc.Bytes())
 	}
-	Num := make([]int, T)
-	for i := 0; i < T; i++ {
-		if sc.Scan() {
-			Num[i], _ = strconv.Atoi(sc.Text())
+
+	if sc.Scan() {
+		tmp := bytes.Fields(sc.Bytes())
+		for i := 0; i < n; i++ {
+			a[i] = toInt(tmp[i])
 		}
 	}
-	sort.Sort(sort.IntSlice(Num))
-	var sum int
-	var sub int
-	var mul int
-	var div int
 	if sc.Scan() {
-		sum, _ = strconv.Atoi(sc.Text())
+		tmp := bytes.Fields(sc.Bytes())
+		for i := 0; i < 4; i++ {
+			op[i] = toInt(tmp[i])
+		}
 	}
+
+	for i := 0; i < 4; i++ {
+		for j := 0; j < op[i]; j++ {
+			ops[idx] = i + 1
+			idx++
+		}
+	}
+	dfs(0, 1, a[0])
+
+	fmt.Println(max64, min64)
+}
+func dfs(cnt int, idx int, num int) {
+	result := 0
+	if cnt == n-1 {
+		if num < min64 {
+			min64 = num
+		}
+		if num > max64 {
+			max64 = num
+		}
+	} else {
+		for i := 0; i < n-1; i++ {
+			if check[i] == false {
+				switch ops[i] {
+				case 1:
+					result = num + a[idx]
+				case 2:
+					result = num - a[idx]
+				case 3:
+					result = num * a[idx]
+				case 4:
+					result = num / a[idx]
+				}
+				check[i] = true
+				dfs(cnt+1, idx+1, result)
+				check[i] = false
+				result = a[0]
+			}
+		}
+	}
+}
+func toInt(bytes []byte) int {
+	n, f := 0, 1
+	for _, v := range bytes {
+		if v == '-' {
+			f = -1
+		}
+		n *= 10
+		n += int(v - '0')
+	}
+	n = n * f
+	return n
+}
+
+func nojam10799() {
+	var Plan string
+	var result int
+	var stick [100001]int
+	j := 0
+	tail := 0
+
 	if sc.Scan() {
-		sub, _ = strconv.Atoi(sc.Text())
+		Plan = sc.Text()
 	}
-	if sc.Scan() {
-		mul, _ = strconv.Atoi(sc.Text())
+	Plan = strings.ReplaceAll(Plan, "()", "a")
+
+	for i := 0; i < len(Plan); i++ {
+		if Plan[i] == '(' {
+			j++
+		} else if Plan[i] == 'a' {
+			if j != 0 {
+				for k := 0; k < j; k++ {
+					if stick[k] != -1 {
+						stick[k]++
+						tail = k
+					}
+				}
+			}
+		} else {
+			for k := 0; k < j; k++ {
+				if stick[k] != -1 {
+					tail = k
+				}
+			}
+			result += stick[tail] + 1
+			stick[tail] = -1
+		}
 	}
-	if sc.Scan() {
-		div, _ = strconv.Atoi(sc.Text())
-	}
-	var max int
-	var min int
-	for i:=0;i<mul;i+=2{
-		max=Num[T-i]*Num[T-(i+1)]
-		min=Num[i]*Num[i+1]
-	}
-	for i:=0;i<sum;i++{
-		
-	}
+
+	fmt.Println(result)
+
 }
 
 func main() {
-	nojam9020()
+	nojam10799()
 }
