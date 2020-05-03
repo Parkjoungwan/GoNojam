@@ -1,5 +1,22 @@
+package solved
 
-func nojam11050() {
+import (
+	"bufio"
+	"bytes"
+	"fmt"
+	"math"
+	"os"
+	"sort"
+	"strconv"
+	"strings"
+)
+
+var (
+	sc = bufio.NewScanner(os.Stdin)
+	wr = bufio.NewWriter(os.Stdout)
+)
+
+func Nojam11050() {
 	var a int
 	var b int
 
@@ -22,7 +39,7 @@ func nojam11050() {
 	fmt.Println(resultA)
 }
 
-func nojam2743() {
+func Nojam2743() {
 	var a string
 	fmt.Scan(&a)
 	fmt.Println(len(a))
@@ -31,7 +48,7 @@ func nojam2743() {
 	}
 }
 
-func nojam4999() {
+func Nojam4999() {
 	var me string
 	var doc string
 	fmt.Scan(&me)
@@ -56,7 +73,7 @@ func nojam4999() {
 	fmt.Println("no")
 }
 
-func nojam10988() {
+func Nojam10988() {
 	var palen string
 	fmt.Scan(&palen)
 	var count int
@@ -71,7 +88,7 @@ func nojam10988() {
 		fmt.Println(0)
 	}
 }
-func nojam1002() {
+func Nojam1002() {
 	var x1, x2, y1, y2, r1, r2 float64
 	var count int
 	fmt.Scan(&count)
@@ -101,7 +118,7 @@ func nojam1002() {
 	}
 }
 
-func nojam2941() {
+func Nojam2941() {
 	var Cro string
 	var count int
 	var count2 int
@@ -173,7 +190,7 @@ func nojam2941() {
 	fmt.Println((len(Cro) - count2) + (count - dzcount))
 }
 
-func nojam11726() {
+func Nojam11726() {
 	var ga [1001]int
 	var N int
 	fmt.Scan(&N)
@@ -187,25 +204,25 @@ func nojam11726() {
 
 var ans int
 
-func nojam9663() {
+func Nojam9663() {
 	var N int
 	fmt.Scan(&N)
 	for i := 1; i <= N; i++ {
 		var Col []int = make([]int, 15)
 		Col[1] = i
-		nojam9633dfs(1, N, Col)
+		Nojam9633dfs(1, N, Col)
 	}
 	fmt.Println(ans)
 }
 
-func nojam9633dfs(Row int, N int, Col []int) {
+func Nojam9633dfs(Row int, N int, Col []int) {
 	if Row == N {
 		ans++
 	} else {
 		for i := 1; i <= N; i++ {
 			Col[Row+1] = i
-			if nojam9633Possible(Row+1, Col) {
-				nojam9633dfs(Row+1, N, Col)
+			if Nojam9633Possible(Row+1, Col) {
+				Nojam9633dfs(Row+1, N, Col)
 			} else {
 				Col[Row+1] = 0
 			}
@@ -213,7 +230,7 @@ func nojam9633dfs(Row int, N int, Col []int) {
 	}
 }
 
-func nojam9633Possible(C int, Col []int) bool {
+func Nojam9633Possible(C int, Col []int) bool {
 	for i := 1; i < C; i++ {
 		if Col[i] == Col[C] {
 			return false
@@ -225,8 +242,7 @@ func nojam9633Possible(C int, Col []int) bool {
 	return true
 }
 
-
-func nojam11650() {
+func Nojam11650() {
 	sc := bufio.NewScanner(os.Stdin)
 	wr := bufio.NewWriter(os.Stdout)
 	defer wr.Flush()
@@ -273,7 +289,7 @@ func (h cusheap) Less(i, j int) bool {
 
 func (h cusheap) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
 
-func nojam16212() {
+func Nojam16212() {
 	var N int
 	fmt.Scan(&N)
 	X := make([]int, N)
@@ -286,7 +302,7 @@ func nojam16212() {
 	}
 }
 
-func nojam1059() {
+func Nojam1059() {
 	var N int
 	var num [1001]int
 	var Luckey int
@@ -321,7 +337,7 @@ func nojam1059() {
 	fmt.Println((Unlukey-down)*(up-Unlukey) - 1)
 }
 
-func nojam1041() {
+func Nojam1041() {
 	var N int
 	fmt.Scan(&N)
 	var A, B, C, D, E, F int
@@ -381,7 +397,7 @@ func nojam1041() {
 	}
 }
 
-func nojam3047() {
+func Nojam3047() {
 	Num := make([]int, 3)
 	for i := 0; i < 3; i++ {
 		fmt.Scan(&Num[i])
@@ -415,7 +431,7 @@ func nojam3047() {
 	}
 }
 
-func nojam2309() {
+func Nojam2309() {
 	Height := make([]int, 9)
 	var all int
 	var i, j int
@@ -443,7 +459,7 @@ func nojam2309() {
 	}
 }
 
-func nojam1699() {
+func Nojam1699() {
 	var number [100001]int
 	var N int
 	fmt.Scan(&N)
@@ -457,7 +473,7 @@ func nojam1699() {
 	fmt.Println(number[N])
 }
 
-func nojam1010() {
+func Nojam1010() {
 	var N, M int
 	var T int
 	fmt.Scan(&T)
@@ -478,7 +494,7 @@ func nojam1010() {
 	}
 }
 
-func nojam11399() {
+func Nojam11399() {
 	var N int
 	fmt.Scan(&N)
 	Per := make([]int, N)
@@ -495,7 +511,7 @@ func nojam11399() {
 	fmt.Println(ans)
 }
 
-func nojam2875() {
+func Nojam2875() {
 	var M int
 	var F int
 	var K int
@@ -521,7 +537,7 @@ func nojam2875() {
 	fmt.Println(count)
 
 }
-func nojam10610() {
+func Nojam10610() {
 	var s string
 	var sum int64
 	sc := bufio.NewScanner(os.Stdin)
@@ -549,7 +565,7 @@ func nojam10610() {
 		}
 	}
 }
-func nojam1929() {
+func Nojam1929() {
 	wr := bufio.NewWriter(os.Stdout)
 	defer wr.Flush()
 	var N, M int
@@ -568,4 +584,150 @@ func nojam1929() {
 			fmt.Fprintln(wr, i) //이거 출력이 안될지도?
 		}
 	}
+}
+
+func Nojam9020() {
+	defer wr.Flush()
+	var T int
+	if sc.Scan() {
+		T, _ = strconv.Atoi(sc.Text())
+	}
+	var PN [10001]int
+	var Gold int
+	var gold1, gold2 int
+	for i := 2; i <= 10000; i++ {
+		if PN[i] == 0 {
+			for j := i * i; j <= 10000; j += i {
+				PN[j] = 1
+			}
+		}
+	}
+	for i := 0; i < T; i++ {
+		check := 10001.0
+		if sc.Scan() {
+			Gold, _ = strconv.Atoi(sc.Text())
+		}
+		for j := 2; j < Gold; j++ {
+			if PN[j] != 1 && PN[Gold-j] != 1 {
+				if check > math.Abs(float64(Gold-2*j)) {
+					gold1 = j
+					gold2 = Gold - j
+					check = math.Abs(float64(Gold - 2*j))
+				}
+			}
+		}
+		if gold1 > gold2 {
+			gold1, gold2 = gold2, gold1
+		}
+		fmt.Fprintf(wr, "%d %d\n", gold1, gold2)
+		check = 10001
+	}
+}
+func Nojam14888() {
+	if sc.Scan() {
+		n = toInt(sc.Bytes())
+	}
+
+	if sc.Scan() {
+		tmp := bytes.Fields(sc.Bytes())
+		for i := 0; i < n; i++ {
+			a[i] = toInt(tmp[i])
+		}
+	}
+	if sc.Scan() {
+		tmp := bytes.Fields(sc.Bytes())
+		for i := 0; i < 4; i++ {
+			op[i] = toInt(tmp[i])
+		}
+	}
+
+	for i := 0; i < 4; i++ {
+		for j := 0; j < op[i]; j++ {
+			ops[idx] = i + 1
+			idx++
+		}
+	}
+	dfs(0, 1, a[0])
+
+	fmt.Println(max64, min64)
+}
+func dfs(cnt int, idx int, num int) {
+	result := 0
+	if cnt == n-1 {
+		if num < min64 {
+			min64 = num
+		}
+		if num > max64 {
+			max64 = num
+		}
+	} else {
+		for i := 0; i < n-1; i++ {
+			if check[i] == false {
+				switch ops[i] {
+				case 1:
+					result = num + a[idx]
+				case 2:
+					result = num - a[idx]
+				case 3:
+					result = num * a[idx]
+				case 4:
+					result = num / a[idx]
+				}
+				check[i] = true
+				dfs(cnt+1, idx+1, result)
+				check[i] = false
+				result = a[0]
+			}
+		}
+	}
+}
+func toInt(bytes []byte) int {
+	n, f := 0, 1
+	for _, v := range bytes {
+		if v == '-' {
+			f = -1
+		}
+		n *= 10
+		n += int(v - '0')
+	}
+	n = n * f
+	return n
+}
+
+func Nojam10799() {
+	var Plan string
+	var result int
+	var stick [100001]int
+	j := 0
+	tail := 0
+
+	if sc.Scan() {
+		Plan = sc.Text()
+	}
+	Plan = strings.ReplaceAll(Plan, "()", "a")
+
+	for i := 0; i < len(Plan); i++ {
+		if Plan[i] == '(' {
+			j++
+		} else if Plan[i] == 'a' {
+			if j != 0 {
+				for k := 0; k < j; k++ {
+					if stick[k] != -1 {
+						stick[k]++
+						tail = k
+					}
+				}
+			}
+		} else {
+			for k := 0; k < j; k++ {
+				if stick[k] != -1 {
+					tail = k
+				}
+			}
+			result += stick[tail] + 1
+			stick[tail] = -1
+		}
+	}
+
+	fmt.Println(result)
 }
