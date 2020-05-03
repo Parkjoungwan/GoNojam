@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 )
 
@@ -45,10 +46,47 @@ var (
 
 	fmt.Println(result)
 }*/
+func delete(i int, s []int) []int {
+	s = append(s[:i], s[i+1:]...)
+	c := make([]int, len(s))
+	copy(c, s)
+	return c
+}
 
 func nojam11866() {
-
+	var N, K int
+	defer wr.Flush()
+	fmt.Scan(&N, &K)
+	arr := make([]int, N)
+	for i := 0; i < N; i++ {
+		arr[i] = i + 1
+	}
+	var val = K - 1
+	fmt.Fprintf(wr, "<")
+	for i := 0; i < N; i++ {
+		fmt.Fprintf(wr, "%d", arr[val])
+		if i != N-1 {
+			fmt.Fprintf(wr, ", ")
+		}
+		arr = delete(val, arr)
+		val += K - 1
+		if N-i-1 != 0 {
+			val %= N - i - 1
+		}
+	}
+	fmt.Fprintf(wr, ">")
+}
+func test() {
+	var N int
+	fmt.Scan(&N)
+	arr := make([]int, N)
+	for i := 0; i < N; i++ {
+		arr[i] = i + 1
+	}
+	fmt.Println(arr)
+	arr = delete(6, arr)
+	fmt.Println(arr)
 }
 func main() {
-
+	nojam11866()
 }
